@@ -4,11 +4,11 @@
 
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="pytorch入门, CV DeepLearning MachineLearning 计算机视觉 深度学习">
-    <meta name="baidu-site-verification" content="fmlEuI34ir" />
-    <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY" />
+    <meta name="baidu-site-verification" content="fmlEuI34ir">
+    <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY">
     <meta name="description" content="一.$tensor$的创建:$torch.tensor()$
 x_numpy = np.array([0.1, 0.2, 0.3])
 x_torch = torch.tensor([0.1, 0.2, 0.3])
@@ -73,7 +73,7 @@ print(&#39;x_nump">
         </script>
     
 
-<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
     <body>
@@ -810,7 +810,7 @@ e <span class="token operator">=</span> c <span class="token operator">*</span> 
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'c'</span><span class="token punctuation">,</span> c<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">,</span> d<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'e'</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<img src="https://colah.github.io/posts/2015-08-Backprop/img/tree-eval.png" alt="img" style="zoom:33%;">
+<img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="https://colah.github.io/posts/2015-08-Backprop/img/tree-eval.png" alt="img" style="zoom:33%;">
 
 <p>​    输出结果为：</p>
 <pre><code>c tensor(3., grad_fn=&lt;AddBackward0&gt;)
@@ -827,10 +827,10 @@ x = torch.tensor([1.0], requires_grad=True)
 y = f(x)
 y.backward()
 
-print(&#39;Analytical f\&#39;(x):&#39;, fp(x))
-print(&#39;PyTorch\&#39;s f\&#39;(x):&#39;, x.grad)</code></pre><p>可以看到输出的结果是一样的：</p>
-<pre><code>Analytical f&#39;(x): tensor([-2.], grad_fn=&lt;MulBackward0&gt;)
-PyTorch&#39;s f&#39;(x): tensor([-2.])</code></pre><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">g</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">:</span>
+print('Analytical f\'(x):', fp(x))
+print('PyTorch\'s f\'(x):', x.grad)</code></pre><p>可以看到输出的结果是一样的：</p>
+<pre><code>Analytical f'(x): tensor([-2.], grad_fn=&lt;MulBackward0&gt;)
+PyTorch's f'(x): tensor([-2.])</code></pre><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">g</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token number">2</span><span class="token operator">*</span>w<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span>w<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> w<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">*</span>torch<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>w<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
 <span class="token keyword">def</span> <span class="token function">grad_g</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -845,7 +845,7 @@ z<span class="token punctuation">.</span>backward<span class="token punctuation"
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'PyTorch\'s grad g(w)'</span><span class="token punctuation">,</span> w<span class="token punctuation">.</span>grad<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出：</p>
 <pre><code>Analytical grad g(w) tensor([2.0000, 5.2832])
-PyTorch&#39;s grad g(w) tensor([2.0000, 5.2832])</code></pre><p>有了梯度，我们就可以用来计算梯度下降：</p>
+PyTorch's grad g(w) tensor([2.0000, 5.2832])</code></pre><p>有了梯度，我们就可以用来计算梯度下降：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>x<span class="token number">-2</span><span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span>
 
@@ -870,7 +870,7 @@ step_size <span class="token operator">=</span> <span class="token number">0.25<
     x<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>detach_<span class="token punctuation">(</span><span class="token punctuation">)</span>
     x<span class="token punctuation">.</span>grad<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>输出结果：</p>
-<pre><code>iter,    x,    f(x),    f&#39;(x),    f&#39;(x) pytorch
+<pre><code>iter,    x,    f(x),    f'(x),    f'(x) pytorch
 0,    5.000,    9.000,    6.000,    6.000
 1,    3.500,    2.250,    3.000,    3.000
 2,    2.750,    0.562,    1.500,    1.500
@@ -944,7 +944,7 @@ y shape torch.Size([50, 1])
 w shape torch.Size([2, 1])
 
 Analytical gradient [ 2.606523 -3.605597]
-PyTorch&#39;s gradient [ 2.606523  -3.6055958]
+PyTorch's gradient [ 2.606523  -3.6055958]
 iter,    loss,    w
 0,    6.28,    [0.4786954  0.72111917]
 1,    2.96,    [0.27993613 0.9474361 ]
@@ -1074,7 +1074,25 @@ optim<span class="token punctuation">.</span>step<span class="token punctuation"
             sample <span class="token operator">=</span> self<span class="token punctuation">.</span>transform<span class="token punctuation">(</span>sample<span class="token punctuation">)</span>
 
         <span class="token keyword">return</span> sample<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -1617,7 +1635,7 @@ optim<span class="token punctuation">.</span>step<span class="token punctuation"
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" target="_blank">
+                    <a href="/tags/python文件处理/" target="_blank">
                         <span class="chip bg-color">python文件处理</span>
                     </a>
                     
@@ -1853,7 +1871,7 @@ print('x_nump
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">8.2k</span> 字
+                <span class="white-color">8.6k</span> 字
             
 
             
@@ -2088,5 +2106,5 @@ $(function () {
             </script>
         
 
-    </body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":200},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>

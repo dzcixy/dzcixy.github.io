@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>dzcixy&#39;s blog</title>
+  
+  <subtitle>dzcixy&#39;s blog</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://github.com/dzcixy/dzcixy.github.io.git/"/>
+  <updated>2020-06-29T08:56:58.794Z</updated>
+  <id>https://github.com/dzcixy/dzcixy.github.io.git/</id>
+  
+  <author>
+    <name>dzcixy</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VGG Net</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/</id>
+    <published>2020-06-28T08:03:22.000Z</published>
+    <updated>2020-06-29T08:56:58.794Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;VGG是Oxford的Visual Geometry
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="VGG" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/VGG/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用pytorch实现手写数字识别</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/05/29/mnist/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/05/29/mnist/</id>
+    <published>2020-05-29T08:03:22.000Z</published>
+    <updated>2020-06-29T03:50:01.331Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;使用mnist数据集实现手写数字识别是入门必做吧。这里使用pyTorch框架进行简单神经网络的搭建。&lt;/p&gt;
+&lt;p&gt;首先导入需要的包。&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="mnist" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/mnist/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CNN食物分类</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/31/cnn/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/31/cnn/</id>
+    <published>2020-03-31T08:03:22.000Z</published>
+    <updated>2020-04-24T08:22:49.123Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;首先导入需要使用的包：&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="CNN" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/CNN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python函数</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/30/python-han-shu/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/30/python-han-shu/</id>
+    <published>2020-03-30T08:03:22.000Z</published>
+    <updated>2020-06-29T06:01:02.077Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;本文用来记录python在deep learning中读取数据时所需要用到的一些函数。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一.os.listdir() 方法用于返回指定的文件夹包含的文件或文件夹的名字的列表。&lt;/p&gt;
+&lt;p&gt;它不包括 . 和 ..
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="function of python" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/function-of-python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>The different between model.eval() and with torch.no_grad()</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/30/pytorch-zhu-yi-shi-xiang/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/30/pytorch-zhu-yi-shi-xiang/</id>
+    <published>2020-03-30T08:03:22.000Z</published>
+    <updated>2020-04-24T08:22:49.128Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;两者区别&lt;br&gt;在PyTorch中进行validation时，会使用model.eval()切换到测试模式，在该模式下，&lt;br&gt;主要用于通知dropout层和batchnorm层在train和val模式间切换&lt;br&gt;在train模式下，dropout网络层会按照设定的参数p
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="function of model" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/function-of-model/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tips for Training DNN</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/29/tips-for-dnn/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/29/tips-for-dnn/</id>
+    <published>2020-03-29T08:03:22.000Z</published>
+    <updated>2020-06-29T03:13:19.468Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;构建深度学习的三个步骤：&lt;br&gt;&lt;strong&gt;①定义一系列函数$(define \ a \ set \ of \ function)$&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;②函数的拟合程度$(goodness \ of \
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="Training DNN" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/Training-DNN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python文件输入输出</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/python-wen-jian-shu-ru-shu-chu/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/python-wen-jian-shu-ru-shu-chu/</id>
+    <published>2020-03-28T08:03:22.000Z</published>
+    <updated>2020-06-29T06:09:11.828Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;python读取文件使用open函数，返回一个文本对象，我们一般只会用到open函数的前面两个参数，第一个参数是要读取文件的名称，第二个参数是读取文件的模式。 
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="python文件处理" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>pytorch入门</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/pytorch/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/pytorch/</id>
+    <published>2020-03-28T08:03:22.000Z</published>
+    <updated>2020-06-29T03:24:39.072Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;&lt;em&gt;一.$tensor$的创建:$torch.tensor()$&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="pytorch" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/pytorch/"/>
+    
+  </entry>
+  
+</feed>

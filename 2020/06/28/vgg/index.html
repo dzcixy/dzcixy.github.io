@@ -4,11 +4,11 @@
 
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="VGG Net, CV DeepLearning MachineLearning 计算机视觉 深度学习">
-    <meta name="baidu-site-verification" content="fmlEuI34ir" />
-    <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY" />
+    <meta name="baidu-site-verification" content="fmlEuI34ir">
+    <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY">
     <meta name="description" content="前言VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。VGG有">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -70,7 +70,7 @@
         </script>
     
 
-<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
     <body>
@@ -730,7 +730,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        971
+                        1k
                     </div>
                     
 
@@ -755,13 +755,13 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。VGG有两种结构，分别是VGG16和VGG19，两者并没有本质上的区别，只是网络深度不一样。VGG的泛化能力非常好，在不同的图片数据集上都有良好的表现。到目前为止，VGG依然经常被用来提取特征图像。</p>
-<h3 id="VGG的网络架构"><a href="#VGG的网络架构" class="headerlink" title="VGG的网络架构"></a>VGG的网络架构</h3><p><img src="/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/1.png" alt="1"></p>
-<p><img src="/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/2.png" alt="2"></p>
+<h3 id="VGG的网络架构"><a href="#VGG的网络架构" class="headerlink" title="VGG的网络架构"></a>VGG的网络架构</h3><p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="./VGG/1.png" alt="1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="./VGG/2.png" alt="2"></p>
 <p>B与C的差别就是C比B多了一些1X1的卷积核，1X1的卷积核主要用来降维，这里主要是用来做非线性变换。VGG的架构很简单，就是通过不断的堆叠卷积层和池化层增加网络的深度，之后用全连接层将其铺平输出。</p>
 <h3 id="VGG原理"><a href="#VGG原理" class="headerlink" title="VGG原理"></a>VGG原理</h3><h4 id="小卷积核代替大卷积"><a href="#小卷积核代替大卷积" class="headerlink" title="小卷积核代替大卷积"></a>小卷积核代替大卷积</h4><p>对于网络深度，虽然AlexNet有使用了11x11和5x5的大卷积，但大多数还是3x3卷积，对于stride=4的11x11的大卷积核，一开始原图的尺寸很大因而冗余，最为原始的纹理细节的特征变化用大卷积核尽早捕捉到，后面的更深的层数害怕会丢失掉较大局部范围内的特征相关性，后面转而使用更多3x3的小卷积核（和一个5x5卷积）去捕捉细节变化。</p>
 <p>而VGGNet则清一色使用3x3卷积。因为卷积不仅涉及到计算量，还影响到感受野。前者关系到是否方便部署到移动端、是否能满足实时处理、是否易于训练等，后者关系到参数更新、特征图的大小、特征是否提取的足够多、模型的复杂度和参数量等等。</p>
 <p>VGG通过3x3的卷积来代替5x5，7x7， 11x11的卷积，下图展示了如何通过两个3x3的卷积代替一个5x5的卷积的感受野：</p>
-<p><img src="/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/3.png" alt="3"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/shw2018/cdn@1.0/sakura/img/loader/orange.progress-bar-stripe-loader.svg" data-original="./VGG/3.png" alt="3"></p>
 <h3 id="VGG的优缺点"><a href="#VGG的优缺点" class="headerlink" title="VGG的优缺点"></a>VGG的优缺点</h3><h4 id="VGG的优点"><a href="#VGG的优点" class="headerlink" title="VGG的优点"></a>VGG的优点</h4><blockquote>
 <p>+架构简单，整个网络使用同样大小(3x3)的卷积核尺寸和同样大小(2x2)的池化层尺寸。</p>
 <p>+证明了使用小的卷积核代替大的卷积核效果更好。</p>
@@ -843,7 +843,25 @@ cfgs <span class="token operator">=</span> <span class="token punctuation">{</sp
         exit<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
     model <span class="token operator">=</span> VGG<span class="token punctuation">(</span>make_features<span class="token punctuation">(</span>cfg<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
     <span class="token keyword">return</span> model<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -1604,7 +1622,7 @@ import torch.utils.data
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">8.2k</span> 字
+                <span class="white-color">8.6k</span> 字
             
 
             
@@ -1839,5 +1857,5 @@ $(function () {
             </script>
         
 
-    </body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":200},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>

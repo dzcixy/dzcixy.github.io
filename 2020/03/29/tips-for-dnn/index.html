@@ -4,11 +4,11 @@
 
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Tips for Training DNN, CV DeepLearning MachineLearning 计算机视觉 深度学习">
-    <meta name="baidu-site-verification" content="fmlEuI34ir" />
-    <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY" />
+    <meta name="baidu-site-verification" content="fmlEuI34ir">
+    <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY">
     <meta name="description" content="构建深度学习的三个步骤：①定义一系列函数$(define \ a \ set \ of \ function)$②函数的拟合程度$(goodness \ of \ function)$③选出最优的模型$(pick \ the \ best ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -70,7 +70,7 @@
         </script>
     
 
-<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
     <body>
@@ -730,7 +730,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.3k
+                        1.4k
                     </div>
                     
 
@@ -766,7 +766,25 @@
 <p>第三个方法就是$Dropout$，通过一定概率将某些$nuron$删除而得到新的一个较小的神经网络，进行训练，这样就相当于将一共有$2^n$种的小的神经网络进行训练后取结果的平均值。</p>
 <p>模块化：<br>$deep \ learning$的好处就是模组化，尤其是在语音识别中的应用。模组化的意思是：将每一层的$neuron$看做一个模组，前面的模组是可以影响后面模组的判断的。例如做一个分类的问题的时候，假设分别红黄蓝三种颜色的物块，第一层的$basic \ calssifiers$已经做完。现在我们的数据里面红和黄的数据有很多，但是蓝的数据很少。这时候第二层可以通过第一层的$classifiers$来进行构建第二层的$calssifiers$，这样，利用上一层的分类来构建下一层的分类，即使蓝的数据很少，也可以做到不错的准确率。但是模组化并不需要我们人去做，机器学习是会自己去学习的$(The \ modularization\ is\ automatically\ learned\ from\ data)$。所以说$deep \ learning$所需要的数据其实是比较少的。</p>
 <p> $deep \ learning$并不是说需要很多$data$，正是因为我们所有的$data$很少，所以我们才需要机器学会去做举一反三的事情，所以才是$deep \ learning$。</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -1358,7 +1376,7 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" target="_blank">
+                    <a href="/tags/python文件处理/" target="_blank">
                         <span class="chip bg-color">python文件处理</span>
                     </a>
                     
@@ -1541,7 +1559,7 @@
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">8.2k</span> 字
+                <span class="white-color">8.6k</span> 字
             
 
             
@@ -1776,5 +1794,5 @@ $(function () {
             </script>
         
 
-    </body>
+    <script>!function(e){var r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function t(){for(var c=0;c<r.length;c++)t=r[c],void 0,0<=(n=t.getBoundingClientRect()).top&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=r[c];t=o,n=function(){r=r.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}t(),e.addEventListener("scroll",function(){!function(t,n){clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)}(t,e)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":200},"mobile":{"show":false},"react":{"opacity":0.7}});</script></body>
 </html>
