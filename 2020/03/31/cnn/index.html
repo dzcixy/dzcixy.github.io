@@ -1460,36 +1460,33 @@ prediction <span class="token operator">=</span> <span class="token punctuation"
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/31/cnn/">
+                <a href="/2020/05/29/mnist/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="CNN食物分类">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="使用pytorch实现手写数字识别">
                         
-                        <span class="card-title">CNN食物分类</span>
+                        <span class="card-title">使用pytorch实现手写数字识别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            首先导入需要使用的包：
-import os
-import numpy as np
-import cv2
+                            使用mnist数据集实现手写数字识别是入门必做吧。这里使用pyTorch框架进行简单神经网络的搭建。
+首先导入需要的包。
 import torch
 import torch.nn as nn
-import torchvision.transforms as 
+import torch.utils.data 
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-31
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-05-29
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1502,12 +1499,11 @@ import torchvision.transforms as
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CNN/" target="_blank">
-                        <span class="chip bg-color">CNN</span>
+                    <a href="/tags/mnist/" target="_blank">
+                        <span class="chip bg-color">mnist</span>
                     </a>
                     
                 </div>
@@ -1521,19 +1517,22 @@ import torchvision.transforms as
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/30/pytorch-zhu-yi-shi-xiang/">
+                <a href="/2020/03/30/python-han-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="The different between model.eval() and with torch.no_grad()">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="python函数">
                         
-                        <span class="card-title">The different between model.eval() and with torch.no_grad()</span>
+                        <span class="card-title">python函数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            两者区别在PyTorch中进行validation时，会使用model.eval()切换到测试模式，在该模式下，主要用于通知dropout层和batchnorm层在train和val模式间切换在train模式下，dropout网络层会按照设
+                            本文用来记录python在deep learning中读取数据时所需要用到的一些函数。
+一.os.listdir() 方法用于返回指定的文件夹包含的文件或文件夹的名字的列表。
+它不包括 . 和 .. 即使它在文件夹中。
+只支持在 Unix,
                         
                     </div>
                     <div class="publish-info">
@@ -1555,8 +1554,8 @@ import torchvision.transforms as
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/function-of-model/" target="_blank">
-                        <span class="chip bg-color">function of model</span>
+                    <a href="/tags/function-of-python/" target="_blank">
+                        <span class="chip bg-color">function of python</span>
                     </a>
                     
                 </div>
@@ -1731,7 +1730,7 @@ import torchvision.transforms as
 
             
                 &nbsp; | &nbsp;字数统计:&nbsp;
-                <span class="white-color">6.3k</span> 字
+                <span class="white-color">7.2k</span> 字
             
 
             

@@ -6,13 +6,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="python函数, CV DeepLearning MachineLearning 计算机视觉 深度学习">
+    <meta name="keywords" content="使用pytorch实现手写数字识别, CV DeepLearning MachineLearning 计算机视觉 深度学习">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY" />
-    <meta name="description" content="本文用来记录python在deep learning中读取数据时所需要用到的一些函数。
-一.os.listdir() 方法用于返回指定的文件夹包含的文件或文件夹的名字的列表。
-它不包括 . 和 .. 即使它在文件夹中。
-只支持在 Unix,">
+    <meta name="description" content="使用mnist数据集实现手写数字识别是入门必做吧。这里使用pyTorch框架进行简单神经网络的搭建。
+首先导入需要的包。
+import torch
+import torch.nn as nn
+import torch.utils.data ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +21,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>python函数 | dzcixy&#39;s blog</title>
+    <title>使用pytorch实现手写数字识别 | dzcixy&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -577,13 +578,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        python函数
+                        使用pytorch实现手写数字识别
                     </div>
                 </div>
             </div>
@@ -695,8 +696,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/function-of-python/" target="_blank">
-                                <span class="chip bg-color">function of python</span>
+                            <a href="/tags/mnist/" target="_blank">
+                                <span class="chip bg-color">mnist</span>
                             </a>
                         
                     </div>
@@ -719,7 +720,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-30
+                    2020-05-29
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -733,14 +734,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        535
+                        927
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        4 分
                     </div>
                     
                 
@@ -757,80 +758,146 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>本文用来记录python在deep learning中读取数据时所需要用到的一些函数。</strong></p>
-<p>一.os.listdir() 方法用于返回指定的文件夹包含的文件或文件夹的名字的列表。</p>
-<p>它不包括 . 和 .. 即使它在文件夹中。</p>
-<p>只支持在 Unix, Windows 下使用。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os<span class="token punctuation">,</span> sys
+                <p>使用mnist数据集实现手写数字识别是入门必做吧。这里使用pyTorch框架进行简单神经网络的搭建。</p>
+<p>首先导入需要的包。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>data <span class="token keyword">as</span> Data
+<span class="token keyword">import</span> torchvision<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接下来需要下载mnist数据集。我们创建train_data。使用torchvision.datasets.MNIST进行数据集的下载。</p>
+<pre class="line-numbers language-python"><code class="language-python">train_data <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>MNIST<span class="token punctuation">(</span>
+    root<span class="token operator">=</span><span class="token string">'./mnist/'</span><span class="token punctuation">,</span>   <span class="token comment" spellcheck="true">#下载到该目录下</span>
+    train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>                                     <span class="token comment" spellcheck="true">#为训练数据</span>
+    transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>    <span class="token comment" spellcheck="true">#将其装换为tensor的形式</span>
+    download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">#第一次设置为true表示下载，下载完成后，将其置成false</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>之后将其导入data_loader中，这个数据加载类会自动帮我们进行数据集的切片。</p>
+<pre class="line-numbers language-python"><code class="language-python">train_data <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>MNIST<span class="token punctuation">(</span>
+    root<span class="token operator">=</span><span class="token string">'./mnist'</span><span class="token punctuation">,</span>
+    train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    download<span class="token operator">=</span><span class="token boolean">False</span>
+<span class="token punctuation">)</span>
+train_loader <span class="token operator">=</span> Data<span class="token punctuation">.</span>DataLoader<span class="token punctuation">(</span>dataset<span class="token operator">=</span>train_data<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> num_workers<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+test_data <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>MNIST<span class="token punctuation">(</span>
+    root<span class="token operator">=</span><span class="token string">'./mnist'</span><span class="token punctuation">,</span>
+    train<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span>
+    transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+test_loader <span class="token operator">=</span> Data<span class="token punctuation">.</span>DataLoader<span class="token punctuation">(</span>dataset<span class="token operator">=</span>test_data<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> num_workers<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+test_num <span class="token operator">=</span> len<span class="token punctuation">(</span>test_data<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>之后开始定义我们的模型，由于minist数据集是灰度图像，并且图片的size都是（28， 28， 1），所以输入图片的时候不需要进行额外的修改。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Net</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>Net<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span><span class="token comment" spellcheck="true">#(1, 28, 28)</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_channels<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> out_channels<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">#(16, 28, 28)</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">#(16, 28, 28)</span>
+            nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#(16, 14, 14)</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv2 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_channels<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">,</span> out_channels<span class="token operator">=</span><span class="token number">32</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">#(32, 14, 14)</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token comment" spellcheck="true">#(32, 14, 14)</span>
+            nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">#(32, 7, 7)</span>
+        <span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>fc <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">32</span> <span class="token operator">*</span> <span class="token number">7</span> <span class="token operator">*</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv2<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        x <span class="token operator">=</span> x<span class="token punctuation">.</span>view<span class="token punctuation">(</span>x<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>特别注意在最后传入全连接层时，最好自己将x的size改变以确保不会因为自适应而造成错误。因为在传入全连接层时会默认压缩成二维，例如[1, 2, 3, 4]会被压缩成[1<em>2, 3</em>4]。</p>
+<p>之后开始训练。</p>
+<pre class="line-numbers language-python"><code class="language-python">net <span class="token operator">=</span> Net<span class="token punctuation">(</span><span class="token punctuation">)</span>
+loss_fn <span class="token operator">=</span> nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+optim <span class="token operator">=</span> torch<span class="token punctuation">.</span>optim<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>net<span class="token punctuation">.</span>parameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> lr <span class="token operator">=</span> <span class="token number">0.001</span><span class="token punctuation">)</span>
 
-<span class="token comment" spellcheck="true"># 打开文件</span>
-path <span class="token operator">=</span> <span class="token string">"/var/www/html/"</span>
-dirs <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span> path <span class="token punctuation">)</span>
+save_path <span class="token operator">=</span> <span class="token string">'./mnist.pth'</span>
+best_acc <span class="token operator">=</span> <span class="token number">0.0</span>
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
 
-<span class="token comment" spellcheck="true"># 输出所有文件和文件夹</span>
-<span class="token keyword">for</span> file <span class="token keyword">in</span> dirs<span class="token punctuation">:</span>
-   <span class="token keyword">print</span> file<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>输出为：</p>
-<pre><code>test.htm
-stamp
-faq.htm
-_vti_txt
-robots.txt
-itemlisting
-resumelisting
-writing_effective_resume.htm
-advertisebusiness.htm
-papers
-resume</code></pre><p>二.python路径拼接os.path.join()函数的用法<br>os.path.join()函数：连接两个或更多的路径名组件</p>
-<p>1.如果各组件名首字母不包含’/‘，则函数会自动加上<br>2.如果有一个组件是一个绝对路径，则在它之前的所有组件均会被舍弃<br>3.如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os
+    net<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    running_loss <span class="token operator">=</span> <span class="token number">0.0</span>
+    <span class="token keyword">for</span> step<span class="token punctuation">,</span> data <span class="token keyword">in</span> enumerate<span class="token punctuation">(</span>train_loader<span class="token punctuation">,</span> start<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        images<span class="token punctuation">,</span> labels <span class="token operator">=</span> data
+        optim<span class="token punctuation">.</span>zero_grad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        logits <span class="token operator">=</span> net<span class="token punctuation">(</span>images<span class="token punctuation">)</span>
+        loss <span class="token operator">=</span> loss_fn<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> labels<span class="token punctuation">)</span>
+        loss<span class="token punctuation">.</span>backward<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        optim<span class="token punctuation">.</span>step<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-Path1 <span class="token operator">=</span> <span class="token string">'a'</span>
-Path2 <span class="token operator">=</span> <span class="token string">'b'</span>
-Path3 <span class="token operator">=</span> <span class="token string">'c'</span>
 
-Path10 <span class="token operator">=</span> Path1 <span class="token operator">+</span> Path2 <span class="token operator">+</span> Path3
-Path20 <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>Path1<span class="token punctuation">,</span>Path2<span class="token punctuation">,</span>Path3<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path10 = '</span><span class="token punctuation">,</span>Path10<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path20 = '</span><span class="token punctuation">,</span>Path20<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre><code>Path10 = abc
-Path20 = a\b\c</code></pre><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os
+        running_loss <span class="token operator">+=</span> loss<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        rate <span class="token operator">=</span> <span class="token punctuation">(</span>step<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span>len<span class="token punctuation">(</span>train_loader<span class="token punctuation">)</span>
+        a <span class="token operator">=</span> <span class="token string">"*"</span> <span class="token operator">*</span> int<span class="token punctuation">(</span>rate <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+        b <span class="token operator">=</span> <span class="token string">"."</span> <span class="token operator">*</span> int<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> rate<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\rtrain loss: {:^3.0f}%[{}->{}]{:.4f}"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>int<span class="token punctuation">(</span>rate<span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> loss<span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-Path1 <span class="token operator">=</span> <span class="token string">'a'</span>
-Path2 <span class="token operator">=</span> <span class="token string">'b'</span>
-Path3 <span class="token operator">=</span> <span class="token string">'/c'</span>
+    net<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    acc <span class="token operator">=</span> <span class="token number">0.0</span>
+    <span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> data_test <span class="token keyword">in</span> test_loader<span class="token punctuation">:</span>
+            test_images<span class="token punctuation">,</span> test_labels <span class="token operator">=</span> data_test
+            outputs <span class="token operator">=</span> net<span class="token punctuation">(</span>test_images<span class="token punctuation">)</span>
+            predict_y <span class="token operator">=</span> torch<span class="token punctuation">.</span>max<span class="token punctuation">(</span>outputs<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token comment" spellcheck="true">#torch.max返回两个数值，一个是最大值，一个是最大值的下标</span>
+            acc <span class="token operator">+=</span> <span class="token punctuation">(</span>predict_y <span class="token operator">==</span> test_labels<span class="token punctuation">)</span><span class="token punctuation">.</span>sum<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        test_accurate <span class="token operator">=</span> acc <span class="token operator">/</span> test_num
+        <span class="token keyword">if</span> test_accurate <span class="token operator">></span> best_acc<span class="token punctuation">:</span>
+            best_acc <span class="token operator">=</span> test_accurate
+            torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>net<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> save_path<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'[epoch %d] train_loss: %.3f  test_accuracy: %.3f'</span> <span class="token operator">%</span>
+              <span class="token punctuation">(</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> running_loss <span class="token operator">/</span> step<span class="token punctuation">,</span> test_accurate<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-Path10 <span class="token operator">=</span> Path1 <span class="token operator">+</span> Path2 <span class="token operator">+</span> Path3
-Path20 <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>Path1<span class="token punctuation">,</span>Path2<span class="token punctuation">,</span>Path3<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path10 = '</span><span class="token punctuation">,</span>Path10<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path20 = '</span><span class="token punctuation">,</span>Path20 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre><code>Path10 = ab/c
-Path20 = /c</code></pre><p>三.python的split()函数</p>
-<p>python split() 通过指定分隔符对字符串进行切片，如果参数 num 有指定值，则分隔 num+1 个子字符串</p>
-<pre class="line-numbers language-python"><code class="language-python">str<span class="token punctuation">.</span>split<span class="token punctuation">(</span>str<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">,</span> num<span class="token operator">=</span>string<span class="token punctuation">.</span>count<span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<pre><code>str -- 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。  
-num -- 分割次数。默认为 -1, 即分隔所有。</code></pre><pre class="line-numbers language-python"><code class="language-python">str <span class="token operator">=</span> <span class="token string">"1_2"</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<pre><code>1
-2</code></pre><p>四.numpy中的argmax函数：<br>arg函数是用来取出列表中最大的数的索引。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">10</span>
-<span class="token operator">>></span><span class="token operator">></span> a
-array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-       <span class="token punctuation">[</span><span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token number">5</span>
-<span class="token operator">>></span><span class="token operator">></span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>a<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>a<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>其中axis=0代表寻找每一列中最大数的索引，axis=1代表行。</p>
-<p>五.pytorch中的item()函数<br>item函数是将张量tensor转变为数值的函数。</p>
-<pre class="line-numbers language-python"><code class="language-python">
-x <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>值得注意的是item函数要在张量只有一个值的时候才可以使用。</p>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Finished Training'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在完成训练后，训练的权重会保存在所设置路径下的文件中，进行预测的时候，建立模型，载入权重，照一张数字的图片，对其进行裁剪，灰度等操作之后加载入模型进行预测。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">import</span>  matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+<span class="token keyword">from</span> torchvision <span class="token keyword">import</span> transforms
+<span class="token keyword">import</span> torch
+<span class="token keyword">from</span> model <span class="token keyword">import</span> Net
+
+img <span class="token operator">=</span> Image<span class="token punctuation">.</span>open<span class="token punctuation">(</span><span class="token string">"./YLY2@}8UMGLW37S$)NCVZ23.png"</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># [N, C, H, W]</span>
+
+train_transform <span class="token operator">=</span> transforms<span class="token punctuation">.</span>Compose<span class="token punctuation">(</span><span class="token punctuation">[</span>
+        transforms<span class="token punctuation">.</span>Grayscale<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        transforms<span class="token punctuation">.</span>Resize<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+img <span class="token operator">=</span> train_transform<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># expand batch dimension</span>
+img <span class="token operator">=</span> torch<span class="token punctuation">.</span>unsqueeze<span class="token punctuation">(</span>img<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true"># create model</span>
+model <span class="token operator">=</span> Net<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true"># load model weights</span>
+model_weight_path <span class="token operator">=</span> <span class="token string">"./mnist.pth"</span>
+model<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span>model_weight_path<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+index_to_class <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'0'</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">,</span> <span class="token string">'3'</span><span class="token punctuation">,</span> <span class="token string">'4'</span><span class="token punctuation">,</span> <span class="token string">'5'</span><span class="token punctuation">,</span> <span class="token string">'6'</span><span class="token punctuation">,</span> <span class="token string">'7'</span><span class="token punctuation">,</span> <span class="token string">'8'</span><span class="token punctuation">,</span> <span class="token string">'9'</span><span class="token punctuation">]</span>
+
+
+model<span class="token punctuation">.</span>eval<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">with</span> torch<span class="token punctuation">.</span>no_grad<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment" spellcheck="true"># predict class</span>
+    y <span class="token operator">=</span> model<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#print(y.size())</span>
+    output <span class="token operator">=</span> torch<span class="token punctuation">.</span>squeeze<span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#print(output)</span>
+    predict <span class="token operator">=</span> torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>output<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#print(predict)</span>
+    predict_cla <span class="token operator">=</span> torch<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>predict<span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment" spellcheck="true">#print(predict_cla)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>index_to_class<span class="token punctuation">[</span>predict_cla<span class="token punctuation">]</span><span class="token punctuation">,</span> predict<span class="token punctuation">[</span>predict_cla<span class="token punctuation">]</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>需要注意的是，载入模型的图片必须多一个维度batch，所以我们用img = torch.unsqueeze(img, dim=0）在图片的开头增加一个batch维度。</p>
+<p>之后载入图片，得到输出，将输出的batch维度压缩掉，使用softmax函数得到概率分布，再用argmax函数得到最大值的下标，打印最大值所对应的类别及其概率。</p>
 
             </div>
             <hr/>
@@ -981,7 +1048,7 @@ x <span class="token operator">=</span> torch<span class="token punctuation">.</
                     </span>
                     <a href="https://github.com/dzcixy/dzcixy.github.io.git" class="b-link-green">dzcixy's blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2020/03/30/python-han-shu/" class="b-link-green">python函数</a>
+                    <a href="/2020/05/29/mnist/" class="b-link-green">使用pytorch实现手写数字识别</a>
                 </p>
             </div>
 
@@ -1004,7 +1071,7 @@ x <span class="token operator">=</span> torch<span class="token punctuation">.</
         repo: 'dzcixy.github.io',
         owner: 'dzcixy',
         admin: ["dzcixy"],
-        id: '2020/03/30/python-han-shu/',
+        id: '2020/05/29/mnist/',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1323,9 +1390,64 @@ x <span class="token operator">=</span> torch<span class="token punctuation">.</
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/05/29/mnist/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="使用pytorch实现手写数字识别">
+                        
+                        <span class="card-title">使用pytorch实现手写数字识别</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            使用mnist数据集实现手写数字识别是入门必做吧。这里使用pyTorch框架进行简单神经网络的搭建。
+首先导入需要的包。
+import torch
+import torch.nn as nn
+import torch.utils.data 
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-05-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/deep-learning/" class="post-category" target="_blank">
+                                    deep learning
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/mnist/" target="_blank">
+                        <span class="chip bg-color">mnist</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/03/31/cnn/">
                     <div class="card-image">
@@ -1349,9 +1471,9 @@ import torchvision.transforms as
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-31
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1369,55 +1491,6 @@ import torchvision.transforms as
                     
                     <a href="/tags/CNN/" target="_blank">
                         <span class="chip bg-color">CNN</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/30/pytorch-zhu-yi-shi-xiang/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="The different between model.eval() and with torch.no_grad()">
-                        
-                        <span class="card-title">The different between model.eval() and with torch.no_grad()</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            两者区别在PyTorch中进行validation时，会使用model.eval()切换到测试模式，在该模式下，主要用于通知dropout层和batchnorm层在train和val模式间切换在train模式下，dropout网络层会按照设
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-30
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/deep-learning/" class="post-category" target="_blank">
-                                    deep learning
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/function-of-model/" target="_blank">
-                        <span class="chip bg-color">function of model</span>
                     </a>
                     
                 </div>
