@@ -9,8 +9,7 @@
     <meta name="keywords" content="VGG Net, CV DeepLearning MachineLearning 计算机视觉 深度学习">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY" />
-    <meta name="description" content="##前言
-VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。V">
+    <meta name="description" content="前言VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。VGG有">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -731,7 +730,7 @@ VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字�
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        975
+                        971
                     </div>
                     
 
@@ -755,21 +754,15 @@ VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字�
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>##前言</p>
-<p>VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。VGG有两种结构，分别是VGG16和VGG19，两者并没有本质上的区别，只是网络深度不一样。VGG的泛化能力非常好，在不同的图片数据集上都有良好的表现。到目前为止，VGG依然经常被用来提取特征图像。</p>
-<p>##VGG的网络架构</p>
-<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Csource_posts%5Cimage(NM5UYT422PE$D2%NO_E" alt="img">)QS.png)</p>
-<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Csource_posts%5Cimage%5Cimage-20200629164123051.png" alt="image-20200629164123051"></p>
+                <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。VGG有两种结构，分别是VGG16和VGG19，两者并没有本质上的区别，只是网络深度不一样。VGG的泛化能力非常好，在不同的图片数据集上都有良好的表现。到目前为止，VGG依然经常被用来提取特征图像。</p>
+<h3 id="VGG的网络架构"><a href="#VGG的网络架构" class="headerlink" title="VGG的网络架构"></a>VGG的网络架构</h3><p><img src="/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/1.png" alt="1"></p>
+<p><img src="/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/2.png" alt="2"></p>
 <p>B与C的差别就是C比B多了一些1X1的卷积核，1X1的卷积核主要用来降维，这里主要是用来做非线性变换。VGG的架构很简单，就是通过不断的堆叠卷积层和池化层增加网络的深度，之后用全连接层将其铺平输出。</p>
-<p>##VGG原理</p>
-<p>###小卷积核代替大卷积</p>
-<p>对于网络深度，虽然AlexNet有使用了11x11和5x5的大卷积，但大多数还是3x3卷积，对于stride=4的11x11的大卷积核，一开始原图的尺寸很大因而冗余，最为原始的纹理细节的特征变化用大卷积核尽早捕捉到，后面的更深的层数害怕会丢失掉较大局部范围内的特征相关性，后面转而使用更多3x3的小卷积核（和一个5x5卷积）去捕捉细节变化。</p>
+<h3 id="VGG原理"><a href="#VGG原理" class="headerlink" title="VGG原理"></a>VGG原理</h3><h4 id="小卷积核代替大卷积"><a href="#小卷积核代替大卷积" class="headerlink" title="小卷积核代替大卷积"></a>小卷积核代替大卷积</h4><p>对于网络深度，虽然AlexNet有使用了11x11和5x5的大卷积，但大多数还是3x3卷积，对于stride=4的11x11的大卷积核，一开始原图的尺寸很大因而冗余，最为原始的纹理细节的特征变化用大卷积核尽早捕捉到，后面的更深的层数害怕会丢失掉较大局部范围内的特征相关性，后面转而使用更多3x3的小卷积核（和一个5x5卷积）去捕捉细节变化。</p>
 <p>而VGGNet则清一色使用3x3卷积。因为卷积不仅涉及到计算量，还影响到感受野。前者关系到是否方便部署到移动端、是否能满足实时处理、是否易于训练等，后者关系到参数更新、特征图的大小、特征是否提取的足够多、模型的复杂度和参数量等等。</p>
 <p>VGG通过3x3的卷积来代替5x5，7x7， 11x11的卷积，下图展示了如何通过两个3x3的卷积代替一个5x5的卷积的感受野：</p>
-<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Csource_posts%5Cimage%5Cimage-20200629164147286.png" alt="image-20200629164147286"></p>
-<p>##VGG的优缺点</p>
-<p>###VGG的优点</p>
-<blockquote>
+<p><img src="/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/3.png" alt="3"></p>
+<h3 id="VGG的优缺点"><a href="#VGG的优缺点" class="headerlink" title="VGG的优缺点"></a>VGG的优缺点</h3><h4 id="VGG的优点"><a href="#VGG的优点" class="headerlink" title="VGG的优点"></a>VGG的优点</h4><blockquote>
 <p>+架构简单，整个网络使用同样大小(3x3)的卷积核尺寸和同样大小(2x2)的池化层尺寸。</p>
 <p>+证明了使用小的卷积核代替大的卷积核效果更好。</p>
 <p>+验证了通过不断堆叠网络的深度可以提高网络的性能</p>
@@ -778,8 +771,7 @@ VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字�
 <blockquote>
 <p>+VGG网络的参数庞大，意味着需要消耗更多的计算资源，其中绝大部分的参数都来自全连接层。</p>
 </blockquote>
-<p>##VGG网络的搭建</p>
-<p>使用pytorch搭建的VGG网络代码如下：</p>
+<h4 id="VGG网络的搭建"><a href="#VGG网络的搭建" class="headerlink" title="VGG网络的搭建"></a>VGG网络的搭建</h4><p>使用pytorch搭建的VGG网络代码如下：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
 <span class="token keyword">import</span> torch
 
@@ -1360,8 +1352,7 @@ cfgs <span class="token operator">=</span> <span class="token punctuation">{</sp
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ##前言
-VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。V
+                            前言VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。VGG有
                         
                     </div>
                     <div class="publish-info">
