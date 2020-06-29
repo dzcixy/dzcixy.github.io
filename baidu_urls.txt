@@ -1,1 +1,8 @@
-https://github.com/dzcixy/dzcixy.github.io.git/2020/06/28/hello-world/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/06/29/rnn/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/03/31/cnn/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/03/30/python-han-shu/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/03/30/pytorch-zhu-yi-shi-xiang/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/03/29/tips-for-dnn/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/03/29/mo-kuai-hua/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/python-wen-jian-shu-ru-shu-chu/
+https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/pytorch/
