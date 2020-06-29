@@ -1,3 +1,4 @@
+https://github.com/dzcixy/dzcixy.github.io.git/2020/06/28/vgg/
 https://github.com/dzcixy/dzcixy.github.io.git/2020/05/29/mnist/
 https://github.com/dzcixy/dzcixy.github.io.git/2020/03/31/cnn/
 https://github.com/dzcixy/dzcixy.github.io.git/2020/03/30/python-han-shu/

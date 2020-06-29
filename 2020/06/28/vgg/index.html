@@ -6,13 +6,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="python函数, CV DeepLearning MachineLearning 计算机视觉 深度学习">
+    <meta name="keywords" content="VGG Net, CV DeepLearning MachineLearning 计算机视觉 深度学习">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="KeoTn_OFy4ndJwXNmm2gMeQfPhd7alqE9vQDwI32KCY" />
-    <meta name="description" content="本文用来记录python在deep learning中读取数据时所需要用到的一些函数。
-一.os.listdir() 方法用于返回指定的文件夹包含的文件或文件夹的名字的列表。
-它不包括 . 和 .. 即使它在文件夹中。
-只支持在 Unix,">
+    <meta name="description" content="##前言
+VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。V">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>python函数 | dzcixy&#39;s blog</title>
+    <title>VGG Net | dzcixy&#39;s blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -577,13 +575,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        python函数
+                        VGG Net
                     </div>
                 </div>
             </div>
@@ -695,8 +693,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/function-of-python/" target="_blank">
-                                <span class="chip bg-color">function of python</span>
+                            <a href="/tags/VGG/" target="_blank">
+                                <span class="chip bg-color">VGG</span>
                             </a>
                         
                     </div>
@@ -719,7 +717,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-30
+                    2020-06-28
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -733,14 +731,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        535
+                        975
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        2 分
+                        4 分
                     </div>
                     
                 
@@ -757,80 +755,102 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>本文用来记录python在deep learning中读取数据时所需要用到的一些函数。</strong></p>
-<p>一.os.listdir() 方法用于返回指定的文件夹包含的文件或文件夹的名字的列表。</p>
-<p>它不包括 . 和 .. 即使它在文件夹中。</p>
-<p>只支持在 Unix, Windows 下使用。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os<span class="token punctuation">,</span> sys
+                <p>##前言</p>
+<p>VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。VGG有两种结构，分别是VGG16和VGG19，两者并没有本质上的区别，只是网络深度不一样。VGG的泛化能力非常好，在不同的图片数据集上都有良好的表现。到目前为止，VGG依然经常被用来提取特征图像。</p>
+<p>##VGG的网络架构</p>
+<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Csource_posts%5Cimage(NM5UYT422PE$D2%NO_E" alt="img">)QS.png)</p>
+<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Csource_posts%5Cimage%5Cimage-20200629164123051.png" alt="image-20200629164123051"></p>
+<p>B与C的差别就是C比B多了一些1X1的卷积核，1X1的卷积核主要用来降维，这里主要是用来做非线性变换。VGG的架构很简单，就是通过不断的堆叠卷积层和池化层增加网络的深度，之后用全连接层将其铺平输出。</p>
+<p>##VGG原理</p>
+<p>###小卷积核代替大卷积</p>
+<p>对于网络深度，虽然AlexNet有使用了11x11和5x5的大卷积，但大多数还是3x3卷积，对于stride=4的11x11的大卷积核，一开始原图的尺寸很大因而冗余，最为原始的纹理细节的特征变化用大卷积核尽早捕捉到，后面的更深的层数害怕会丢失掉较大局部范围内的特征相关性，后面转而使用更多3x3的小卷积核（和一个5x5卷积）去捕捉细节变化。</p>
+<p>而VGGNet则清一色使用3x3卷积。因为卷积不仅涉及到计算量，还影响到感受野。前者关系到是否方便部署到移动端、是否能满足实时处理、是否易于训练等，后者关系到参数更新、特征图的大小、特征是否提取的足够多、模型的复杂度和参数量等等。</p>
+<p>VGG通过3x3的卷积来代替5x5，7x7， 11x11的卷积，下图展示了如何通过两个3x3的卷积代替一个5x5的卷积的感受野：</p>
+<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Csource_posts%5Cimage%5Cimage-20200629164147286.png" alt="image-20200629164147286"></p>
+<p>##VGG的优缺点</p>
+<p>###VGG的优点</p>
+<blockquote>
+<p>+架构简单，整个网络使用同样大小(3x3)的卷积核尺寸和同样大小(2x2)的池化层尺寸。</p>
+<p>+证明了使用小的卷积核代替大的卷积核效果更好。</p>
+<p>+验证了通过不断堆叠网络的深度可以提高网络的性能</p>
+</blockquote>
+<p>###VGG的缺点</p>
+<blockquote>
+<p>+VGG网络的参数庞大，意味着需要消耗更多的计算资源，其中绝大部分的参数都来自全连接层。</p>
+</blockquote>
+<p>##VGG网络的搭建</p>
+<p>使用pytorch搭建的VGG网络代码如下：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch
 
-<span class="token comment" spellcheck="true"># 打开文件</span>
-path <span class="token operator">=</span> <span class="token string">"/var/www/html/"</span>
-dirs <span class="token operator">=</span> os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span> path <span class="token punctuation">)</span>
 
-<span class="token comment" spellcheck="true"># 输出所有文件和文件夹</span>
-<span class="token keyword">for</span> file <span class="token keyword">in</span> dirs<span class="token punctuation">:</span>
-   <span class="token keyword">print</span> file<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>输出为：</p>
-<pre><code>test.htm
-stamp
-faq.htm
-_vti_txt
-robots.txt
-itemlisting
-resumelisting
-writing_effective_resume.htm
-advertisebusiness.htm
-papers
-resume</code></pre><p>二.python路径拼接os.path.join()函数的用法<br>os.path.join()函数：连接两个或更多的路径名组件</p>
-<p>1.如果各组件名首字母不包含’/‘，则函数会自动加上<br>2.如果有一个组件是一个绝对路径，则在它之前的所有组件均会被舍弃<br>3.如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">class</span> <span class="token class-name">VGG</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> features<span class="token punctuation">,</span> class_num<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span> init_weights<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>VGG<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>features <span class="token operator">=</span> features
+        self<span class="token punctuation">.</span>classifier <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>
+            nn<span class="token punctuation">.</span>Dropout<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">512</span><span class="token operator">*</span><span class="token number">7</span><span class="token operator">*</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2048</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Dropout<span class="token punctuation">(</span>p<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">2048</span><span class="token punctuation">,</span> <span class="token number">2048</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">2048</span><span class="token punctuation">,</span> class_num<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">if</span> init_weights<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>_initialize_weights<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-Path1 <span class="token operator">=</span> <span class="token string">'a'</span>
-Path2 <span class="token operator">=</span> <span class="token string">'b'</span>
-Path3 <span class="token operator">=</span> <span class="token string">'c'</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># N x 3 x 224 x 224</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>features<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># N x 512 x 7 x 7</span>
+        x <span class="token operator">=</span> torch<span class="token punctuation">.</span>flatten<span class="token punctuation">(</span>x<span class="token punctuation">,</span> start_dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token comment" spellcheck="true"># N x 512*7*7</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>classifier<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x
 
-Path10 <span class="token operator">=</span> Path1 <span class="token operator">+</span> Path2 <span class="token operator">+</span> Path3
-Path20 <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>Path1<span class="token punctuation">,</span>Path2<span class="token punctuation">,</span>Path3<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path10 = '</span><span class="token punctuation">,</span>Path10<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path20 = '</span><span class="token punctuation">,</span>Path20<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre><code>Path10 = abc
-Path20 = a\b\c</code></pre><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> os
+    <span class="token keyword">def</span> <span class="token function">_initialize_weights</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> m <span class="token keyword">in</span> self<span class="token punctuation">.</span>modules<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token comment" spellcheck="true"># nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')</span>
+                nn<span class="token punctuation">.</span>init<span class="token punctuation">.</span>xavier_uniform_<span class="token punctuation">(</span>m<span class="token punctuation">.</span>weight<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> m<span class="token punctuation">.</span>bias <span class="token keyword">is</span> <span class="token operator">not</span> None<span class="token punctuation">:</span>
+                    nn<span class="token punctuation">.</span>init<span class="token punctuation">.</span>constant_<span class="token punctuation">(</span>m<span class="token punctuation">.</span>bias<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                nn<span class="token punctuation">.</span>init<span class="token punctuation">.</span>xavier_uniform_<span class="token punctuation">(</span>m<span class="token punctuation">.</span>weight<span class="token punctuation">)</span>
+                <span class="token comment" spellcheck="true"># nn.init.normal_(m.weight, 0, 0.01)</span>
+                nn<span class="token punctuation">.</span>init<span class="token punctuation">.</span>constant_<span class="token punctuation">(</span>m<span class="token punctuation">.</span>bias<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
 
-Path1 <span class="token operator">=</span> <span class="token string">'a'</span>
-Path2 <span class="token operator">=</span> <span class="token string">'b'</span>
-Path3 <span class="token operator">=</span> <span class="token string">'/c'</span>
 
-Path10 <span class="token operator">=</span> Path1 <span class="token operator">+</span> Path2 <span class="token operator">+</span> Path3
-Path20 <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>Path1<span class="token punctuation">,</span>Path2<span class="token punctuation">,</span>Path3<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path10 = '</span><span class="token punctuation">,</span>Path10<span class="token punctuation">)</span>
-<span class="token keyword">print</span> <span class="token punctuation">(</span><span class="token string">'Path20 = '</span><span class="token punctuation">,</span>Path20 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre><code>Path10 = ab/c
-Path20 = /c</code></pre><p>三.python的split()函数</p>
-<p>python split() 通过指定分隔符对字符串进行切片，如果参数 num 有指定值，则分隔 num+1 个子字符串</p>
-<pre class="line-numbers language-python"><code class="language-python">str<span class="token punctuation">.</span>split<span class="token punctuation">(</span>str<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">,</span> num<span class="token operator">=</span>string<span class="token punctuation">.</span>count<span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<pre><code>str -- 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。  
-num -- 分割次数。默认为 -1, 即分隔所有。</code></pre><pre class="line-numbers language-python"><code class="language-python">str <span class="token operator">=</span> <span class="token string">"1_2"</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>str<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">'_'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<pre><code>1
-2</code></pre><p>四.numpy中的argmax函数：<br>arg函数是用来取出列表中最大的数的索引。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">10</span>
-<span class="token operator">>></span><span class="token operator">></span> a
-array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-       <span class="token punctuation">[</span><span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
-<span class="token number">5</span>
-<span class="token operator">>></span><span class="token operator">></span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>a<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
-array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token operator">>></span><span class="token operator">></span> np<span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>a<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
-array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>其中axis=0代表寻找每一列中最大数的索引，axis=1代表行。</p>
-<p>五.pytorch中的item()函数<br>item函数是将张量tensor转变为数值的函数。</p>
-<pre class="line-numbers language-python"><code class="language-python">
-x <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span>item<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>值得注意的是item函数要在张量只有一个值的时候才可以使用。</p>
+<span class="token keyword">def</span> <span class="token function">make_features</span><span class="token punctuation">(</span>cfg<span class="token punctuation">:</span> list<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    layers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    in_channels <span class="token operator">=</span> <span class="token number">3</span>
+    <span class="token keyword">for</span> v <span class="token keyword">in</span> cfg<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> v <span class="token operator">==</span> <span class="token string">"M"</span><span class="token punctuation">:</span>
+            layers <span class="token operator">+=</span> <span class="token punctuation">[</span>nn<span class="token punctuation">.</span>MaxPool2d<span class="token punctuation">(</span>kernel_size<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> stride<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            conv2d <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span>in_channels<span class="token punctuation">,</span> v<span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> padding<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+            layers <span class="token operator">+=</span> <span class="token punctuation">[</span>conv2d<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+            in_channels <span class="token operator">=</span> v
+    <span class="token keyword">return</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span><span class="token operator">*</span>layers<span class="token punctuation">)</span>
+
+
+cfgs <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'vgg11'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'vgg13'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'vgg16'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">'vgg19'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">64</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token number">128</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">,</span> <span class="token string">'M'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">def</span> <span class="token function">vgg</span><span class="token punctuation">(</span>model_name<span class="token operator">=</span><span class="token string">"vgg16"</span><span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        cfg <span class="token operator">=</span> cfgs<span class="token punctuation">[</span>model_name<span class="token punctuation">]</span>
+    <span class="token keyword">except</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Warning: model number {} not in cfgs dict!"</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        exit<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+    model <span class="token operator">=</span> VGG<span class="token punctuation">(</span>make_features<span class="token punctuation">(</span>cfg<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> model<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -981,7 +1001,7 @@ x <span class="token operator">=</span> torch<span class="token punctuation">.</
                     </span>
                     <a href="https://github.com/dzcixy/dzcixy.github.io.git" class="b-link-green">dzcixy's blog</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2020/03/30/python-han-shu/" class="b-link-green">python函数</a>
+                    <a href="/2020/06/28/vgg/" class="b-link-green">VGG Net</a>
                 </p>
             </div>
 
@@ -1004,7 +1024,7 @@ x <span class="token operator">=</span> torch<span class="token punctuation">.</
         repo: 'dzcixy.github.io',
         owner: 'dzcixy',
         admin: ["dzcixy"],
-        id: '2020/03/30/python-han-shu/',
+        id: '2020/06/28/vgg/',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1323,35 +1343,31 @@ x <span class="token operator">=</span> torch<span class="token punctuation">.</
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/31/cnn/">
+                <a href="/2020/06/28/vgg/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="CNN食物分类">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="VGG Net">
                         
-                        <span class="card-title">CNN食物分类</span>
+                        <span class="card-title">VGG Net</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            首先导入需要使用的包：
-import os
-import numpy as np
-import cv2
-import torch
-import torch.nn as nn
-import torchvision.transforms as 
+                            ##前言
+VGG是Oxford的Visual Geometry Group的组提出的，取三个单词的首字母，也是该网络名字的由来。该网络是在ILSVRC 2014上的第二名，主要工作是证明了增加网络的深度能够在一定程度上影响网络最终的性能。V
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-31
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1364,11 +1380,12 @@ import torchvision.transforms as
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CNN/" target="_blank">
-                        <span class="chip bg-color">CNN</span>
+                    <a href="/tags/VGG/" target="_blank">
+                        <span class="chip bg-color">VGG</span>
                     </a>
                     
                 </div>
@@ -1382,24 +1399,28 @@ import torchvision.transforms as
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/30/pytorch-zhu-yi-shi-xiang/">
+                <a href="/2020/05/29/mnist/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="The different between model.eval() and with torch.no_grad()">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="使用pytorch实现手写数字识别">
                         
-                        <span class="card-title">The different between model.eval() and with torch.no_grad()</span>
+                        <span class="card-title">使用pytorch实现手写数字识别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            两者区别在PyTorch中进行validation时，会使用model.eval()切换到测试模式，在该模式下，主要用于通知dropout层和batchnorm层在train和val模式间切换在train模式下，dropout网络层会按照设
+                            使用mnist数据集实现手写数字识别是入门必做吧。这里使用pyTorch框架进行简单神经网络的搭建。
+首先导入需要的包。
+import torch
+import torch.nn as nn
+import torch.utils.data 
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-03-30
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-05-29
                             </span>
                         <span class="publish-author">
                             
@@ -1416,8 +1437,8 @@ import torchvision.transforms as
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/function-of-model/" target="_blank">
-                        <span class="chip bg-color">function of model</span>
+                    <a href="/tags/mnist/" target="_blank">
+                        <span class="chip bg-color">mnist</span>
                     </a>
                     
                 </div>
