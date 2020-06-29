@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://github.com/dzcixy/dzcixy.github.io.git/"/>
-  <updated>2020-06-29T09:26:23.020Z</updated>
+  <updated>2020-06-29T13:10:51.115Z</updated>
   <id>https://github.com/dzcixy/dzcixy.github.io.git/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GoogLe Net</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/06/29/google/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/06/29/google/</id>
+    <published>2020-06-29T13:10:50.000Z</published>
+    <updated>2020-06-29T13:10:51.115Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script&gt;
+        document.querySelectorAll(&#39;.github-emoji&#39;)
+          .forEach(el =&gt; {
+            if (!el.dataset.src) { return; }
+       
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>VGG Net</title>
@@ -178,6 +204,32 @@
   </entry>
   
   <entry>
+    <title>python文件输入输出</title>
+    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/python-wen-jian-shu-ru-shu-chu/"/>
+    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/python-wen-jian-shu-ru-shu-chu/</id>
+    <published>2020-03-28T08:03:22.000Z</published>
+    <updated>2020-06-29T06:09:11.828Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;python读取文件使用open函数，返回一个文本对象，我们一般只会用到open函数的前面两个参数，第一个参数是要读取文件的名称，第二个参数是读取文件的模式。 
+        
+      
+    
+    </summary>
+    
+      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
+    
+    
+      <category term="python文件处理" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>pytorch入门</title>
     <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/pytorch/"/>
     <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/pytorch/</id>
@@ -201,32 +253,6 @@
     
     
       <category term="pytorch" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/pytorch/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python文件输入输出</title>
-    <link href="https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/python-wen-jian-shu-ru-shu-chu/"/>
-    <id>https://github.com/dzcixy/dzcixy.github.io.git/2020/03/28/python-wen-jian-shu-ru-shu-chu/</id>
-    <published>2020-03-28T08:03:22.000Z</published>
-    <updated>2020-06-29T06:09:11.828Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;python读取文件使用open函数，返回一个文本对象，我们一般只会用到open函数的前面两个参数，第一个参数是要读取文件的名称，第二个参数是读取文件的模式。 
-        
-      
-    
-    </summary>
-    
-      <category term="deep learning" scheme="https://github.com/dzcixy/dzcixy.github.io.git/categories/deep-learning/"/>
-    
-    
-      <category term="python文件处理" scheme="https://github.com/dzcixy/dzcixy.github.io.git/tags/python%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
